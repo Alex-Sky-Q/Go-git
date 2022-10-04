@@ -22,6 +22,7 @@ func getCType(url string) (head []string, err error) {
 	if err != nil {
 		return
 	} else {
+		defer resp.Body.Close()
 		head = resp.Header["Content-Type"]
 		return head, err
 	}
