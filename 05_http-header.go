@@ -19,16 +19,13 @@ func main() {
 
 func getCType(url string) (head []string, err error) {
 	resp, err := http.Get(url)
-	//defer func(resp *http.Response) {
-	//	err = resp.Body.Close()
-	//	if err != nil {
-	//		fmt.Println("test")
-	//	}
-	//}(resp)
 	if err != nil {
 		return
 	} else {
 		defer resp.Body.Close()
+		//defer func() {
+		//	err = resp.Body.Close()
+		//}()
 		head = resp.Header["Content-Type"]
 		return head, err
 	}
