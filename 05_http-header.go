@@ -1,4 +1,4 @@
-// Write a function that return Content-Type header
+// Write a function that returns Content-Type header
 
 package main
 
