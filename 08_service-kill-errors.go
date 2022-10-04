@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 )
 
@@ -26,6 +25,6 @@ func killService(pidFile string) error {
 func main() {
 	err := killService("service_pid.txt")
 	if err != nil {
-		log.Fatalf("error: %s", err)
+		fmt.Fprintf(os.Stderr, "error: %s", err)
 	}
 }
