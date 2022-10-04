@@ -27,12 +27,13 @@ func main() {
 		word = strings.ToLower(word)
 		word = strings.TrimSuffix(word, "\"")
 		word = strings.TrimPrefix(word, "\"")
-		_, ok := words[word]
-		if !ok {
-			words[word] = 1
-		} else {
-			words[word]++
-		}
+		words[word]++
+		//_, ok := words[word]
+		//if !ok {
+		//	words[word] = 1
+		//} else {
+		//	words[word]++
+		//}
 	}
 	//for w, cnt := range words {
 	//	fmt.Printf("The word %q appears %v times\n", w, cnt)
