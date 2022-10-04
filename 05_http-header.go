@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	url := "https://google.com"
+	url := "https://google.c"
 	cTypeHeader, err := getCType(url)
 	if err != nil {
 		fmt.Println(err)
@@ -21,12 +21,11 @@ func getCType(url string) (head []string, err error) {
 	resp, err := http.Get(url)
 	if err != nil {
 		return
-	} else {
-		defer resp.Body.Close()
-		//defer func() {
-		//	err = resp.Body.Close()
-		//}()
-		head = resp.Header["Content-Type"]
-		return head, err
 	}
+	defer resp.Body.Close()
+	//defer func() {
+	//	err = resp.Body.Close()
+	//}()
+	head = resp.Header["Content-Type"]
+	return head, err
 }
