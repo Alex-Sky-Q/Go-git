@@ -19,6 +19,12 @@ func main() {
 
 func getCType(url string) (head []string, err error) {
 	resp, err := http.Get(url)
+	//defer func(resp *http.Response) {
+	//	err = resp.Body.Close()
+	//	if err != nil {
+	//		fmt.Println("test")
+	//	}
+	//}(resp)
 	if err != nil {
 		return
 	} else {
