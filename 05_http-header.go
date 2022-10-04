@@ -11,7 +11,7 @@ func main() {
 	url := "https://google.com"
 	cTypeHeader, err := getCType(url)
 	if err != nil {
-		fmt.Printf("Error: %s\n", err)
+		fmt.Println(err)
 	} else {
 		fmt.Println(cTypeHeader)
 	}
