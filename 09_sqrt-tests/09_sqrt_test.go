@@ -26,6 +26,7 @@ func TestMany(t *testing.T) {
 	//}
 	var testCases []TestCase
 	tcFile, _ := os.Open("testCases.csv")
+	defer tcFile.Close()
 	rd := csv.NewReader(tcFile)
 	testcasesStr, _ := rd.ReadAll()
 	for _, tcStr := range testcasesStr {
