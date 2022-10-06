@@ -8,11 +8,13 @@ import (
 
 func main() {
 	sent := "hello world. with pleasure"
-	//fmt.Println(string(sent[1]))
-	fmt.Println(correctSent(sent))
+	fmt.Println(CorrectSent(sent))
 }
 
-func correctSent(s string) (res string) {
+// Task 1. Write a function that:
+// - converts first letter of a sentence to a capital letter
+// - adds a dot at the end
+func CorrectSent(s string) (res string) {
 	////var temp string
 	//temp := strings.ToUpper(string(s[0]))
 	//for i, l := range s[1:] {
@@ -22,6 +24,9 @@ func correctSent(s string) (res string) {
 	//	temp += string(l)
 	//}
 	//return temp
+	if strings.TrimSpace(s) == "" {
+		return s
+	}
 	var temp []string
 	strSplit := strings.Split(s, ". ")
 
@@ -32,7 +37,6 @@ func correctSent(s string) (res string) {
 				break
 			}
 		}
-		//t = strings.ToUpper(string(t[0])) + t[1:]
 		temp = append(temp, t)
 	}
 
