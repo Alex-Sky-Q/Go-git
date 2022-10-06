@@ -8,32 +8,28 @@ import (
 )
 
 func main() {
-	sent := "hi.see you. "
+	sent := "-"
 	fmt.Println(CorrectSent(sent))
 }
 
 // Task 1. Write a function that:
 // - converts first letter of a sentence to a capital letter
-// - adds a dot at the end
+// - adds a dot to the end
 // Assumptions:
-//- "x.z" (no space after dot) - z is not a new sentence
+// ". ", "! " or "? " - are the only valid sentences' separators. If smth like ".- " should also be checked,
+// it can be done by updating regex
+//- "x.z" (no space after dot in the middle of a string) - z is not a new sentence
 //- "!", "?" at the end do not require additional dot
 
 func CorrectSent(s string) (res string) {
-	////var temp string
-	//temp := strings.ToUpper(string(s[0]))
-	//for i, l := range s[1:] {
-	//	if string(l) == "." {
-	//
-	//	}
-	//	temp += string(l)
-	//}
-	//return temp
 
 	if strings.TrimSpace(s) == "" {
 		return s
 	}
 
+	res = s
+
+	// Checking the beginning of a string
 	firstInd := 0
 	for i, l := range s {
 		if unicode.IsLetter(l) {
@@ -44,13 +40,14 @@ func CorrectSent(s string) (res string) {
 	}
 
 	sentLoc, _ := regexp.Compile("[.?!]\\s+")
-	loc := sentLoc.FindStringIndex(res[firstInd:])
-	if len(loc) >= 2 {
-		if loc[1] != len(res) {
-			res = res[:loc[1]] + strings.ToUpper(string(res[loc[1]])) + res[loc[1]+1:]
+	loc := sentLoc.FindAllStringIndex(res[firstInd:], -1)
+	for _, l := range loc {
+		if l[1] != len(res) {
+			res = res[:l[1]] + strings.ToUpper(string(res[l[1]])) + res[l[1]+1:]
 		}
 	}
 
+	// First solution, does not work in case of different endings of the sentence ("!", "?")
 	//var temp []string
 	//strSplit := strings.Split(s, ". ")
 	//for _, t := range strSplit {
@@ -64,8 +61,10 @@ func CorrectSent(s string) (res string) {
 	//}
 	//res = strings.Join(temp, ". ")
 
+	// Checking the end of a string
 	if !strings.ContainsAny(string(res[len(res)-1]), ".!?") {
 		res += "."
 	}
+
 	return res
 }
