@@ -45,3 +45,42 @@ func TestCorrectSent(t *testing.T) {
 	}
 
 }
+
+func TestSliceMean(t *testing.T) {
+	type TCInt struct {
+		in  []int
+		exp float64
+	}
+	testCasesInt := []TCInt{
+		{[]int{1, 2}, 1.5},
+		{[]int{3, 7}, 5},
+	}
+
+	type TCFloat struct {
+		in  []float64
+		exp float64
+	}
+	testCasesFloat := []TCFloat{
+		{[]float64{1, 2.5}, 1.75},
+		{[]float64{3.5, 7.5}, 5.5},
+	}
+
+	for _, tc := range testCasesInt {
+		t.Run("TC", func(t *testing.T) {
+			got := SliceMean(tc.in)
+			if got != tc.exp {
+				t.Fatalf("Got: %v. Want: %v", got, tc.exp)
+			}
+		})
+	}
+
+	for _, tc := range testCasesFloat {
+		t.Run("TC", func(t *testing.T) {
+			got := SliceMean(tc.in)
+			if got != tc.exp {
+				t.Fatalf("Got: %v. Want: %v", got, tc.exp)
+			}
+		})
+	}
+
+}

@@ -8,8 +8,13 @@ import (
 )
 
 func main() {
-	sent := "-"
-	fmt.Println(CorrectSent(sent))
+	//sent := "hello world. with pleasure"
+	//fmt.Println(CorrectSent(sent))
+
+	slInt := []int{1, 2}
+	slFloat := []float64{1, 3.5}
+	fmt.Println(SliceMean(slInt))
+	fmt.Println(SliceMean(slFloat))
 }
 
 // Task 1. Write a function that:
@@ -66,5 +71,21 @@ func CorrectSent(s string) (res string) {
 		res += "."
 	}
 
+	return res
+}
+
+// Task 2. Find a mean of a slice
+
+func SliceMean[N int | float64](s []N) (res float64) {
+	var sliceSum N
+	for _, v := range s {
+		sliceSum += v
+	}
+	return float64(sliceSum) / float64(len(s))
+}
+
+// Task 3. Find a diff
+
+func MinMaxDiff(s []int) (res float64) {
 	return res
 }
