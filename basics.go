@@ -11,10 +11,13 @@ func main() {
 	//sent := "hello world. with pleasure"
 	//fmt.Println(CorrectSent(sent))
 
-	slInt := []int{1, 2}
-	slFloat := []float64{1, 3.5}
-	fmt.Println(SliceMean(slInt))
-	fmt.Println(SliceMean(slFloat))
+	//slInt := []int{1, 2}
+	//slFloat := []float64{1, 3.5}
+	//fmt.Println(SliceMean(slInt))
+	//fmt.Println(SliceMean(slFloat))
+
+	slDiff := []float64{10, 1, 3}
+	fmt.Println(MinMaxDiff(slDiff))
 }
 
 // Task 1. Write a function that:
@@ -86,6 +89,15 @@ func SliceMean[N int | float64](s []N) (res float64) {
 
 // Task 3. Find a diff
 
-func MinMaxDiff(s []int) (res float64) {
-	return res
+func MinMaxDiff(s []float64) (res float64) {
+	minNum, maxNum := s[0], s[0]
+	for _, n := range s[1:] {
+		if n < minNum {
+			minNum = n
+		}
+		if n > maxNum {
+			maxNum = n
+		}
+	}
+	return maxNum - minNum
 }

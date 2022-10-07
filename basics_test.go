@@ -84,3 +84,22 @@ func TestSliceMean(t *testing.T) {
 	}
 
 }
+
+func TestMinMaxDiff(t *testing.T) {
+	type TC struct {
+		in  []float64
+		exp float64
+	}
+	testCases := []TC{
+		{[]float64{1, 2, 3}, 2},
+	}
+
+	for _, tc := range testCases {
+		t.Run("TC", func(t *testing.T) {
+			got := MinMaxDiff(tc.in)
+			if got != tc.exp {
+				t.Fatalf("Got: %v. Want: %v", got, tc.exp)
+			}
+		})
+	}
+}
