@@ -52,8 +52,14 @@ func TestSliceMean(t *testing.T) {
 		exp float64
 	}
 	testCasesInt := []TCInt{
+		{[]int{0, 0}, 0},
 		{[]int{1, 2}, 1.5},
-		{[]int{3, 7}, 5},
+		{[]int{7, 3}, 5},
+		{[]int{3, 3, 3}, 3},
+		{[]int{0, 16, 3, 6}, 6.25},
+		{[]int{0, 16, -3, 6}, 4.75},
+		{[]int{-5, 16, 3, 6}, 5},
+		{[]int{-5, -10, -3, -6}, -6},
 	}
 
 	type TCFloat struct {
@@ -61,13 +67,16 @@ func TestSliceMean(t *testing.T) {
 		exp float64
 	}
 	testCasesFloat := []TCFloat{
+		{[]float64{}, -1},
+		{[]float64{10}, 10},
 		{[]float64{1, 2.5}, 1.75},
-		{[]float64{3.5, 7.5}, 5.5},
+		{[]float64{7.5, 3.5}, 5.5},
+		{[]float64{7.5, 3.56}, 5.53},
 	}
 
 	for _, tc := range testCasesInt {
 		t.Run("TC", func(t *testing.T) {
-			got := SliceMean(tc.in)
+			got, _ := SliceMean(tc.in)
 			if got != tc.exp {
 				t.Fatalf("Got: %v. Want: %v", got, tc.exp)
 			}
@@ -76,7 +85,7 @@ func TestSliceMean(t *testing.T) {
 
 	for _, tc := range testCasesFloat {
 		t.Run("TC", func(t *testing.T) {
-			got := SliceMean(tc.in)
+			got, _ := SliceMean(tc.in)
 			if got != tc.exp {
 				t.Fatalf("Got: %v. Want: %v", got, tc.exp)
 			}

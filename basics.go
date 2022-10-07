@@ -8,13 +8,13 @@ import (
 )
 
 func main() {
-	//sent := "hello world. with pleasure"
-	//fmt.Println(CorrectSent(sent))
+	sent := "hello world. with pleasure"
+	fmt.Println(CorrectSent(sent))
 
-	//slInt := []int{1, 2}
-	//slFloat := []float64{1, 3.5}
-	//fmt.Println(SliceMean(slInt))
-	//fmt.Println(SliceMean(slFloat))
+	slInt := []int{1, 2}
+	slFloat := []float64{1, 3.5}
+	fmt.Println(SliceMean(slInt))
+	fmt.Println(SliceMean(slFloat))
 
 	slDiff := []float64{10, 1, 3}
 	fmt.Println(MinMaxDiff(slDiff))
@@ -47,6 +47,7 @@ func CorrectSent(s string) (res string) {
 		}
 	}
 
+	// Searching for sentences
 	sentLoc, _ := regexp.Compile("[.?!]\\s+")
 	loc := sentLoc.FindAllStringIndex(res[firstInd:], -1)
 	for _, l := range loc {
@@ -79,12 +80,15 @@ func CorrectSent(s string) (res string) {
 
 // Task 2. Find a mean of a slice
 
-func SliceMean[N int | float64](s []N) (res float64) {
+func SliceMean[N int | float64](s []N) (res float64, err error) {
+	if len(s) < 1 {
+		return -1, fmt.Errorf("minimal length of a slice is 1, actual length %v", len(s))
+	}
 	var sliceSum N
 	for _, v := range s {
 		sliceSum += v
 	}
-	return float64(sliceSum) / float64(len(s))
+	return float64(sliceSum) / float64(len(s)), nil
 }
 
 // Task 3. Find a diff between max and min value in a slice
