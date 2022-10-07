@@ -87,9 +87,12 @@ func SliceMean[N int | float64](s []N) (res float64) {
 	return float64(sliceSum) / float64(len(s))
 }
 
-// Task 3. Find a diff
+// Task 3. Find a diff between max and min value in a slice
 
-func MinMaxDiff(s []float64) (res float64) {
+func MinMaxDiff(s []float64) (res float64, err error) {
+	if len(s) < 2 {
+		return -1, fmt.Errorf("minimal length of a slice is 2, actual length %v", len(s))
+	}
 	minNum, maxNum := s[0], s[0]
 	for _, n := range s[1:] {
 		if n < minNum {
@@ -99,5 +102,5 @@ func MinMaxDiff(s []float64) (res float64) {
 			maxNum = n
 		}
 	}
-	return maxNum - minNum
+	return maxNum - minNum, nil
 }

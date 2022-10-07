@@ -91,12 +91,24 @@ func TestMinMaxDiff(t *testing.T) {
 		exp float64
 	}
 	testCases := []TC{
+		{[]float64{}, -1},
+		{[]float64{10}, -1},
 		{[]float64{1, 2, 3}, 2},
+		{[]float64{3.5, 2, 1}, 2.5},
+		{[]float64{1, 3, 2}, 2},
+		{[]float64{1, 6}, 5},
+		{[]float64{6, 1}, 5},
+		{[]float64{3, 3, 3}, 0},
+		{[]float64{-1, 2, 3}, 4},
+		{[]float64{1, 2, -3}, 5},
+		{[]float64{1, -19, 0}, 20},
+		{[]float64{-1, -19, -15}, 18},
+		{[]float64{1.15, -19.33, 0, 36.311}, 55.641},
 	}
 
 	for _, tc := range testCases {
 		t.Run("TC", func(t *testing.T) {
-			got := MinMaxDiff(tc.in)
+			got, _ := MinMaxDiff(tc.in)
 			if got != tc.exp {
 				t.Fatalf("Got: %v. Want: %v", got, tc.exp)
 			}
