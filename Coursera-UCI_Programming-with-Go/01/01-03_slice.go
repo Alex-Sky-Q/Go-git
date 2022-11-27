@@ -1,10 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"sort"
 	"strconv"
 	"strings"
-	"fmt"
 )
 
 func main() {
@@ -16,8 +16,10 @@ func main() {
 		if err != nil {
 			fmt.Println("Sorry, an error occured")
 		}
-		
-		if strings.ToUpper(userInp) == "X" {break}
+
+		if strings.ToUpper(userInp) == "X" {
+			break
+		}
 
 		userInt, err := strconv.Atoi(userInp)
 		if err != nil {
