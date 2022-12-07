@@ -43,7 +43,7 @@ func main() {
 	if len(userStringSlice) > 10 {
 		log.Fatalf("Sorry, there are more than 10 ints in a set")
 	}
-	
+
 	for _, v := range userStringSlice {
 		val, err := strconv.Atoi(v)
 		if err != nil {
@@ -53,5 +53,7 @@ func main() {
 	}
 
 	BubbleSort(userSlice)
-	fmt.Println(userSlice)
+	for _, v := range userSlice {
+		fmt.Print(strconv.Itoa(v) + " ")
+	}
 }
