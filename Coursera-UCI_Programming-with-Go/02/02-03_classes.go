@@ -28,7 +28,7 @@ func (an Animal) Speak() {
 
 func main() {
 	for true {
-		fmt.Print("> ")
+		fmt.Print("> ") // animal method
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Scan()
 		userInput := scanner.Text()
