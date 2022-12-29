@@ -6,13 +6,13 @@ import (
 )
 
 type Chopstick struct {
-	sync.Mutex
+	sync.Mutex // chopstick can be used only by one philosopher at a time, hence we need locking
 }
 
 type Phil struct {
 	leftCS, rightCS *Chopstick
-	eatAmount       int
-	num             int
+	eatAmount       int // to track how many times each philosopher ate
+	num             int // philosopher ID
 }
 
 func (p Phil) eat(wg *sync.WaitGroup, mut *sync.Mutex, host *int) {
@@ -21,11 +21,11 @@ func (p Phil) eat(wg *sync.WaitGroup, mut *sync.Mutex, host *int) {
 		mut.Lock()
 		if *host < 2 {
 			*host++
-			start = true
+			start = true // we can only start eating if there are less than two other philosophers eating
 		}
 		mut.Unlock()
 
-		fmt.Println(*host)
+		//fmt.Println(*host)
 		if start {
 			p.leftCS.Lock()
 			p.rightCS.Lock()
@@ -52,10 +52,10 @@ func main() {
 
 	Phils := make([]*Phil, 5)
 	for i := 0; i < 5; i++ {
-		Phils[i] = &Phil{CS[i], CS[(i+1)%5], 0, i}
+		Phils[i] = &Phil{CS[i], CS[(i+1)%5], 0, i + 1}
 	}
 
-	host := 0
+	host := 0 // to track the requirement that only two philosophers can eat concurrently
 	var mut sync.Mutex
 	var wg sync.WaitGroup
 	wg.Add(5)
